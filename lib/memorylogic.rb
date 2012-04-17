@@ -21,7 +21,7 @@ module Memorylogic
     end
 end
 
-ActiveSupport::BufferedLogger.class_eval do
+Rails.logger.class.class_eval do
   def add_with_memory_info(severity, message = nil, progname = nil, &block)
     r = add_without_memory_info(severity, message, progname, &block)
     add_without_memory_info(severity, "  \e[1;31mMemory usage:\e[0m #{Memorylogic.memory_usage}\n\n", progname, &block)
